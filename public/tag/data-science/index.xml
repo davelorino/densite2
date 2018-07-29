@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Science on  </title>
+    <link>/tag/data-science/</link>
+    <description>Recent content in Data Science on  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tag/data-science/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Text Analysis with visNetwork</title>
+      <link>/2018/07/28/text-analysis-with-visnetwork/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/28/text-analysis-with-visnetwork/</guid>
+      <description>Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e.</description>
+    </item>
+    
+  </channel>
+</rss>

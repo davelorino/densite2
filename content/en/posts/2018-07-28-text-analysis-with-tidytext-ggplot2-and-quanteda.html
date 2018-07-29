@@ -1,0 +1,193 @@
+---
+title: 'Text Analysis with tidytext, ggplot2 and Quanteda '
+author: Davide Lorino
+date: '2018-07-28'
+slug: text-analysis-with-tidytext-ggplot2-and-quanteda
+categories:
+  - Data Science
+  - Text Analysis
+  - R
+tags:
+  - R
+  - Text Analysis
+  - quanteda
+  - tidytext
+  - ggplot2
+---
+
+
+
+<p>In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.</p>
+<div id="libraries" class="section level2">
+<h2>Libraries</h2>
+<p>There are a fair few libraries to load for text analysis;</p>
+<pre class="r"><code>library(stringr)
+library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1     ✔ readr   1.1.1
+## ✔ tibble  1.4.2     ✔ purrr   0.2.5
+## ✔ tidyr   0.8.1     ✔ dplyr   0.7.5
+## ✔ ggplot2 2.2.1     ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter() masks stats::filter()
+## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(tidytext)
+library(readr)
+library(tidyr)
+library(igraph)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     as_data_frame, groups, union</code></pre>
+<pre><code>## The following objects are masked from &#39;package:purrr&#39;:
+## 
+##     compose, simplify</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     crossing</code></pre>
+<pre><code>## The following object is masked from &#39;package:tibble&#39;:
+## 
+##     as_data_frame</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code>library(ggraph)</code></pre>
+</div>
+<div id="load-the-corpus" class="section level2">
+<h2>Load the corpus</h2>
+<p>This file is available on my github.</p>
+<pre class="r"><code>mergedcorpus &lt;- &#39;merged-file copy.txt&#39;</code></pre>
+<p>Store stopwords (“to”, “in”, “the” etc.) in a variable to use later</p>
+<pre class="r"><code>data(stop_words)</code></pre>
+<p>Store the corpus as a data.frame</p>
+<pre class="r"><code>mergedcorpus2 &lt;- read_lines(mergedcorpus)
+mergedcorpusdf &lt;- data_frame(line = 1:length(mergedcorpus2), text = mergedcorpus2)</code></pre>
+<p>Tokenize the documents (split them into single words)</p>
+<pre class="r"><code>mergedtokens &lt;- mergedcorpusdf %&gt;% unnest_tokens(word, text)</code></pre>
+<p>Sort the tokens in order of frequency</p>
+<pre class="r"><code>toptokens &lt;- mergedtokens %&gt;%
+  count(word, sort = TRUE)</code></pre>
+<p>Remove stopwords</p>
+<pre class="r"><code>toptokensnostops &lt;- toptokens %&gt;% anti_join(stop_words)</code></pre>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+</div>
+<div id="simple-bar-chart---top-10-words" class="section level2">
+<h2>Simple Bar Chart - Top 10 Words</h2>
+<p>This plot is purely exploratory, we’ll get to the nicer looking visualizations soon. Let’s look at the top 10 words.</p>
+<pre class="r"><code>library(ggplot2)
+
+toptokensnostops %&gt;%
+  filter(n &gt; 120) %&gt;%
+  mutate(word = reorder(word, n)) %&gt;%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  ggtitle(&quot;The Top 10 Words (Minus Stopwords)&quot;) +
+  xlab(&#39;Count&#39;) +
+  coord_flip()</code></pre>
+<p><img src="/en/posts/2018-07-28-text-analysis-with-tidytext-ggplot2-and-quanteda_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="bigram-network-graph-with-ggplot2-igraph-and-ggraph" class="section level2">
+<h2>Bigram Network Graph with ggplot2, igraph and ggraph</h2>
+<p>This plot will be a little nicer on the eyes, and more informative.</p>
+<p>Let’s prepare the data for the network graph.</p>
+<p>Start by making bigrams:</p>
+<pre class="r"><code>mergedbigrams &lt;- mergedcorpusdf %&gt;%
+  unnest_tokens(bigram, text, token= &quot;ngrams&quot;, n = 2)</code></pre>
+<p>Add a count variable</p>
+<pre class="r"><code>mergedbigrams &lt;- mergedbigrams %&gt;% count(bigram, sort = TRUE)</code></pre>
+<p>Now spread them into “from” and “to” columns:</p>
+<pre class="r"><code>mergedbigrams_sep &lt;- mergedbigrams %&gt;%
+  separate(bigram, c(&quot;word1&quot;, &quot;word2&quot;), sep = &quot; &quot;)</code></pre>
+<p>Take out stopwords</p>
+<pre class="r"><code>mergedbigrams_sep_nostop &lt;- mergedbigrams_sep %&gt;%
+                            filter(!word1 %in% stop_words$word) %&gt;%
+                            filter(!word2 %in% stop_words$word)</code></pre>
+<p>Create a variable that holds the total sum of bigrams</p>
+<pre class="r"><code>sumbigrams &lt;- mergedbigrams_sep_nostop %&gt;%
+  summarize(total = sum(n))
+sumbigrams &lt;- as.integer(sumbigrams)
+sumbigrams &lt;- rep(sumbigrams, dim(mergedbigrams_sep_nostop)[1])
+sumbigrams &lt;- cbind(mergedbigrams_sep_nostop, sumbigrams)</code></pre>
+<p>Add the term frequency for each word pair</p>
+<pre class="r"><code>bigramcount &lt;- sumbigrams %&gt;% mutate(tf = n / sumbigrams)</code></pre>
+</div>
+<div id="making-the-graph" class="section level2">
+<h2>Making the Graph</h2>
+<p>Nearly there! Let’s make the graph variable:</p>
+<pre class="r"><code>docgraph &lt;- bigramcount %&gt;%
+  filter(n &gt; 10) %&gt;%
+  graph_from_data_frame()</code></pre>
+</div>
+<div id="plotting-the-graph-with-ggplot2" class="section level2">
+<h2>Plotting the graph with ggplot2</h2>
+<pre class="r"><code>set.seed(2000)
+arrow &lt;- grid::arrow(type = &quot;closed&quot;, length = unit(.15, &quot;inches&quot;))
+ggraph(docgraph, layout = &quot;fr&quot;) +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = arrow) +
+  geom_node_point(color = &quot;blue&quot;, size = 2) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()</code></pre>
+<p><img src="/en/posts/2018-07-28-text-analysis-with-tidytext-ggplot2-and-quanteda_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Cool. Play around with the docgraph (n &gt; 10) variable by raising and lowering n to increase or decrease the number of word pairs mapped by the network graph. Here’s one set to n &gt; 5 - it’s pretty cluttered!</p>
+<pre class="r"><code>docgraph2 &lt;- bigramcount %&gt;%
+  filter(n &gt; 9) %&gt;%
+  graph_from_data_frame()
+set.seed(2000)
+arrow &lt;- grid::arrow(type = &quot;closed&quot;, length = unit(.15, &quot;inches&quot;))
+ggraph(docgraph2, layout = &quot;fr&quot;) +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = arrow) +
+  geom_node_point(color = &quot;blue&quot;, size = 2) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()</code></pre>
+<p><img src="/en/posts/2018-07-28-text-analysis-with-tidytext-ggplot2-and-quanteda_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Fun stuff! See which word pairs you can pick out. Notice that the strength of the arrow denotes the strength of the relationship.</p>
+</div>
+<div id="key-words-in-context-and-lexical-dispersion-charts-with-quanteda" class="section level2">
+<h2>Key Words in Context and Lexical Dispersion Charts with Quanteda</h2>
+<p>Now we’ll switch over to the Quanteda way of doing text analysis.</p>
+<pre class="r"><code>library(quanteda)</code></pre>
+<pre><code>## Package version: 1.3.0</code></pre>
+<pre><code>## Parallel computing: 2 of 4 threads used.</code></pre>
+<pre><code>## See https://quanteda.io for tutorials and examples.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;quanteda&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:utils&#39;:
+## 
+##     View</code></pre>
+<pre class="r"><code>library(readtext)</code></pre>
+<p>Loud the corpus in a way that Quanteda likes to read it.</p>
+<pre class="r"><code>quantedocs &lt;- texts(readtext(&quot;merged-file copy.txt&quot;))</code></pre>
+<p>Make it lower case</p>
+<pre class="r"><code>quantedocs &lt;- tolower(quantedocs)</code></pre>
+<p>Now we can explore some key words in context:</p>
+<pre class="r"><code>head(kwic(quantedocs, &quot;risk&quot;), 5)</code></pre>
+<pre><code>##                                                                       
+##    [merged-file copy.txt, 3]                             in practice |
+##   [merged-file copy.txt, 69] stakeholder perceptions is broader than |
+##  [merged-file copy.txt, 145]   organisational change is fraught with |
+##  [merged-file copy.txt, 164]               . the current paradigm of |
+##  [merged-file copy.txt, 189]               for the wicked aspects of |
+##                                       
+##  risk | management is a rational,     
+##  risk | analysis. the recognition that
+##  risk | . murphy rules; things        
+##  risk | management, which focuses on  
+##  risk | . i had been thinking</code></pre>
+<p>Tokenize for the Lexical Dispersion Chart</p>
+<pre class="r"><code>quantev &lt;- tokens(quantedocs, remove_punct = TRUE) %&gt;% as.character()
+(total_length &lt;- length(quantev))</code></pre>
+<pre><code>## [1] 70769</code></pre>
+<p>Now plot the Lexical Dispersion Chart</p>
+<pre class="r"><code>textplot_xray(
+  kwic(quantedocs, &quot;risk&quot;),
+  kwic(quantedocs, &quot;management&quot;),
+  kwic(quantedocs, &quot;analysis&quot;),
+  kwic(quantedocs, &quot;knowledge&quot;)) + ggtitle(&quot;Lexical Dispersion&quot;)</code></pre>
+<p><img src="/en/posts/2018-07-28-text-analysis-with-tidytext-ggplot2-and-quanteda_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>Nice, now we have a better idea of when and where certain topics were and wern’t discussed.</p>
+<p>That’s it for now - we covered a lot so play around with these methods. Quanteda, tidytext, tm and ggplot/ggraph/igraph are great packages for doing text analysis in R.</p>
+</div>

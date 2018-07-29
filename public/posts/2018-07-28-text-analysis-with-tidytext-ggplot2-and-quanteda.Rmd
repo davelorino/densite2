@@ -1,0 +1,245 @@
+---
+title: 'Text Analysis with tidytext, ggplot2 and Quanteda '
+author: Davide Lorino
+date: '2018-07-28'
+slug: text-analysis-with-tidytext-ggplot2-and-quanteda
+categories:
+  - Data Science
+  - Text Analysis
+  - R
+tags:
+  - R
+  - Text Analysis
+  - quanteda
+  - tidytext
+  - ggplot2
+---
+
+In this short guide we'll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let's see how much we can find out without going through and reading all 34 blog posts.
+
+## Libraries
+
+There are a fair few libraries to load for text analysis;
+
+```{r}
+library(stringr)
+library(tidyverse)
+library(tidytext)
+library(readr)
+library(tidyr)
+library(igraph)
+library(ggraph)
+```
+
+## Load the corpus 
+
+This file is available on my github.
+
+```{r}
+mergedcorpus <- 'merged-file copy.txt'
+```
+
+Store stopwords ("to", "in", "the" etc.) in a variable to use later
+
+```{r}
+data(stop_words)
+```
+
+Store the corpus as a data.frame
+
+```{r}
+mergedcorpus2 <- read_lines(mergedcorpus)
+mergedcorpusdf <- data_frame(line = 1:length(mergedcorpus2), text = mergedcorpus2)
+```
+
+Tokenize the documents (split them into single words)
+
+```{r}
+mergedtokens <- mergedcorpusdf %>% unnest_tokens(word, text)
+```
+
+Sort the tokens in order of frequency
+
+```{r}
+toptokens <- mergedtokens %>%
+  count(word, sort = TRUE)
+```
+
+Remove stopwords
+
+```{r}
+toptokensnostops <- toptokens %>% anti_join(stop_words)
+```
+
+## Simple Bar Chart - Top 10 Words
+
+This plot is purely exploratory, we'll get to the nicer looking visualizations soon. Let's look at the top 10 words.
+
+```{r}
+library(ggplot2)
+
+toptokensnostops %>%
+  filter(n > 120) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  ggtitle("The Top 10 Words (Minus Stopwords)") +
+  xlab('Count') +
+  coord_flip()
+```
+
+## Bigram Network Graph with ggplot2, igraph and ggraph
+
+This plot will be a little nicer on the eyes, and more informative.
+
+Let's prepare the data for the network graph.
+
+Start by making bigrams:
+
+```{r}
+mergedbigrams <- mergedcorpusdf %>%
+  unnest_tokens(bigram, text, token= "ngrams", n = 2)
+```
+
+Add a count variable
+
+```{r}
+mergedbigrams <- mergedbigrams %>% count(bigram, sort = TRUE)
+```
+
+Now spread them into "from" and "to" columns:
+
+```{r}
+mergedbigrams_sep <- mergedbigrams %>%
+  separate(bigram, c("word1", "word2"), sep = " ")
+```  
+  
+Take out stopwords
+
+```{r}
+mergedbigrams_sep_nostop <- mergedbigrams_sep %>%
+                            filter(!word1 %in% stop_words$word) %>%
+                            filter(!word2 %in% stop_words$word)
+```
+
+Create a variable that holds the total sum of bigrams
+
+```{r}
+sumbigrams <- mergedbigrams_sep_nostop %>%
+  summarize(total = sum(n))
+sumbigrams <- as.integer(sumbigrams)
+sumbigrams <- rep(sumbigrams, dim(mergedbigrams_sep_nostop)[1])
+sumbigrams <- cbind(mergedbigrams_sep_nostop, sumbigrams)
+```
+
+Add the term frequency for each word pair
+
+```{r}
+bigramcount <- sumbigrams %>% mutate(tf = n / sumbigrams)
+```
+
+## Making the Graph
+
+Nearly there! Let's make the graph variable:
+
+```{r}
+docgraph <- bigramcount %>%
+  filter(n > 10) %>%
+  graph_from_data_frame()
+```
+
+## Plotting the graph with ggplot2
+
+```{r}
+set.seed(2000)
+arrow <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+ggraph(docgraph, layout = "fr") +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = arrow) +
+  geom_node_point(color = "blue", size = 2) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()
+```
+
+
+Cool. Play around with the docgraph (n > 10) variable by raising and lowering n to increase or decrease the number of word pairs mapped by the network graph. Here's one set to n > 5 - it's pretty cluttered!
+
+```{r}
+docgraph2 <- bigramcount %>%
+  filter(n > 9) %>%
+  graph_from_data_frame()
+set.seed(2000)
+arrow <- grid::arrow(type = "closed", length = unit(.15, "inches"))
+ggraph(docgraph2, layout = "fr") +
+  geom_edge_link(aes(edge_alpha = n), show.legend = FALSE, arrow = arrow) +
+  geom_node_point(color = "blue", size = 2) +
+  geom_node_text(aes(label = name), vjust = 1, hjust = 1) +
+  theme_void()
+```
+
+Fun stuff! See which word pairs you can pick out. Notice that the strength of the arrow denotes the strength of the relationship. 
+
+## Key Words in Context and Lexical Dispersion Charts with Quanteda
+
+Now we'll switch over to the Quanteda way of doing text analysis.
+
+```{r}
+library(quanteda)
+library(readtext)
+```
+
+Loud the corpus in a way that Quanteda likes to read it.
+
+```{r}
+quantedocs <- texts(readtext("merged-file copy.txt"))
+```
+
+Make it lower case
+
+```{r}
+quantedocs <- tolower(quantedocs)
+```
+
+Now we can explore some key words in context:
+
+```{r}
+head(kwic(quantedocs, "risk"), 5)
+```
+
+Tokenize for the Lexical Dispersion Chart
+
+```{r}
+quantev <- tokens(quantedocs, remove_punct = TRUE) %>% as.character()
+(total_length <- length(quantev))
+```
+
+Now plot the Lexical Dispersion Chart
+
+```{r}
+textplot_xray(
+  kwic(quantedocs, "risk"),
+  kwic(quantedocs, "management"),
+  kwic(quantedocs, "analysis"),
+  kwic(quantedocs, "knowledge")) + ggtitle("Lexical Dispersion")
+```
+
+Nice, now we have a better idea of when and where certain topics were and wern't discussed. 
+
+That's it for now - we covered a lot so play around with these methods. Quanteda, tidytext, tm and ggplot/ggraph/igraph are great packages for doing text analysis in R.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

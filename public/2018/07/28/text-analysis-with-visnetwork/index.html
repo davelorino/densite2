@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo 0.45" />
+  <meta charset="utf-8">
+  <title>Text Analysis with visNetwork ·  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e." />
+
+  <meta name="keywords" content="research, r, data science" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/den.css">
+
+
+
+
+<meta property="og:title" content="Text Analysis with visNetwork" />
+<meta property="og:description" content="Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2018/07/28/text-analysis-with-visnetwork/" />
+
+
+
+<meta property="article:published_time" content="2018-07-28T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-07-28T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Text Analysis with visNetwork">
+<meta itemprop="description" content="Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e.">
+
+
+<meta itemprop="datePublished" content="2018-07-28T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-07-28T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="859">
+
+
+
+<meta itemprop="keywords" content="R,Text Analysis,Data Science," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Text Analysis with visNetwork"/>
+<meta name="twitter:description" content="Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e."/>
+</head>
+<body>
+  
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/background.jpg'); background-position: center; background-size: cover;">
+  <div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      
+        <a class="float-left" href="/">
+      
+        
+        <img class="mr20 header-logo-image" src="/images/globe.svg" alt="logo">
+        
+        
+          DL
+         
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            
+              <a class="nav-link" href="/about/">About</a>
+            
+          </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">Text Analysis with visNetwork</h1>
+        <p class="header-date">
+        2018-07-28
+          / In categories
+          <a href="/category/r/">R</a>, 
+            <a href="/category/data-science/">Data Science</a>, 
+            <a href="/category/text-analysis/">Text Analysis</a>
+        </p>
+        
+        <div class="header-underline"></div>
+        
+          <div class="clearfix"></div>
+          <p class="float-right header-tags">
+              <i class="fas fa-tags" aria-hidden="true"></i>
+              <a href="/tag/data-science/">Data Science</a>, 
+                <a href="/tag/r/">R</a>, 
+                <a href="/tag/text-analysis/">Text Analysis</a>
+          </p>
+        
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+<div class="container content">
+  <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="/rmarkdown-libs/vis/vis.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/vis/vis.min.js"></script>
+<script src="/rmarkdown-libs/visNetwork-binding/visNetwork.js"></script>
+
+
+<p>Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.</p>
+<div id="practical-applications-of-text-analysis" class="section level2">
+<h2>Practical Applications of Text Analysis</h2>
+<ul>
+<li>Analysing email data (e.g. from a customer service inbox to analyze queries and feedback),</li>
+<li>Web scraping (e.g. Cambridge Analytica, though always consider the ethical implications of such methods even if the data is publicly available or rightfully yours to share),</li>
+<li>Literary analysis (e.g. poems (Shelley vs Byron) and speeches (Obama vs Trump))</li>
+</ul>
+<p>In this post we’ll look at the Australian Election Speeches 1901 - 2016 dataset provided by <a href="https://electionspeeches.moadoph.gov.au/speeches" class="uri">https://electionspeeches.moadoph.gov.au/speeches</a> - we’ll connect R to their API to read the data, then we’ll clean, analyze and visualize the data with some helpful R packages.</p>
+<pre class="r"><code>library(jsonlite)
+library(readr)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+</div>
+<div id="connecting-to-the-api" class="section level2">
+<h2>Connecting to the API</h2>
+<p>Running the line below will pull the speeches data directly from the API of the Museum of Australian Democracy</p>
+<pre class="r"><code>speeches &lt;- fromJSON(&quot;https://electionspeeches.moadoph.gov.au/api/speeches.json&quot;)</code></pre>
+<p>Call str() on the resulting ‘speeches’ data.frame - i’m not going to print the output here because it’s really large.</p>
+</div>
+<div id="cleaning-the-data" class="section level2">
+<h2>Cleaning the Data</h2>
+<p>Load the stringr package to join the ‘candidate_name’ variable into a ‘Name_Surname’ format instead of ‘Name Surname’ (R doesn’t like spaces in variable names - it can handle them but you have to start using ‘single quotes’ around the variables and it’s a hassle).</p>
+<pre class="r"><code>library(stringr)
+speeches$candidate_name &lt;- str_replace(speeches$candidate_name, &quot; &quot;, &quot;_&quot;)</code></pre>
+<p>Convert ‘candidate_name’ from a character variable to a factor variable</p>
+<pre class="r"><code>speeches$candidate_name &lt;- as.factor(speeches$candidate_name)</code></pre>
+<p>And now let’s remove that twelfth column in our dataset, it’s just a big messy list of metadata that we aren’t even using</p>
+<pre class="r"><code>speeches &lt;- speeches[,-12]</code></pre>
+</div>
+<div id="more-cleaning---creating-helper-functions" class="section level2">
+<h2>More Cleaning - Creating Helper Functions</h2>
+<p>Now that our dataset is looking a little tidier, we’ll want to start cleaning that ‘body’ variable because it contains all of the speeches we’ll be analyzing.</p>
+<p>For our purposes we’ll want to:</p>
+<ul>
+<li>strip the html embedded into the speeches data</li>
+<li>make everything lowercase (otherwise we double up on words)</li>
+<li>remove numbers (not always necessary, it will help us now though)</li>
+<li>remove punctuation (otherwise “word” and “word,” are treated differently)</li>
+<li>remove anything annoying or unhelpful that’s left over</li>
+</ul>
+<pre class="r"><code>cleanFun &lt;- function(htmlString) {
+  return(gsub(&quot;&lt;.*?&gt;&quot;, &quot;&quot;, htmlString))
+}</code></pre>
+<p>Our handy little cleanFun() function will strip 99% of the html from the body. We’ll handle the rest of the html and cleaning with this next function:</p>
+<pre class="r"><code>library(tm)</code></pre>
+<pre><code>## Loading required package: NLP</code></pre>
+<pre class="r"><code>clean_this &lt;- function(x){
+       cleanFun(x) %&gt;%
+       tolower() %&gt;%
+       tm::removeNumbers() %&gt;% 
+       tm::removePunctuation() -&gt; yy 
+       (gsub(&quot;\\\n&quot;, &quot; &quot;, yy))
+}</code></pre>
+<p>Ok now let’s use it on the speeches data.</p>
+<pre class="r"><code>speeches2 &lt;- clean_this(speeches$body)</code></pre>
+<p>Our text data should look a lot cleaner now… let’s take a look.</p>
+<pre class="r"><code>str(speeches2)</code></pre>
+<pre><code>##  chr [1:90] &quot; compliment of hunter mainland invitation faithful representation of their australian interests great honor to &quot;| __truncated__ ...</code></pre>
+</div>
+<div id="preparing-the-data-for-visnetwork" class="section level2">
+<h2>Preparing the Data for visNetwork</h2>
+<p>Cool, now that we’ve cleaned our speeches we can start to analyze visualize them.</p>
+<p>Let’s look at word pairs first.</p>
+<p>Load the tidytext and tidyr libraries.</p>
+<pre class="r"><code>library(tidytext)
+library(tidyr)</code></pre>
+<p>Create a single_tokens variable that holds every individual word in the data ranked by count.</p>
+<pre class="r"><code>single_tokens &lt;- speeches %&gt;%
+  unnest_tokens(output = word, input = body) %&gt;%
+  anti_join(stop_words) %&gt;%
+  count(word) %&gt;%
+  rename(value = n)</code></pre>
+<pre><code>## Joining, by = &quot;word&quot;</code></pre>
+<p>Create body_bigrams2 - a variable that holds every individual pair of words, separated into “from” and “to” columns ranked by count. We’ll trim this down to word pairs that appear greater than or equal to 17 times and we’ll use dplyr and tidytext to filter out stopwords like “to”, “in”, “the” etc.</p>
+<pre class="r"><code>body_bigrams2 &lt;- speeches %&gt;%
+     unnest_tokens(bigram, body, token = &quot;ngrams&quot;, n = 2) %&gt;%
+     separate(bigram, c(&quot;from&quot;, &quot;to&quot;), sep = &quot; &quot;) %&gt;%
+     filter(!from %in% stop_words$word) %&gt;%
+     filter(!to %in% stop_words$word) %&gt;%
+     count(from, to, sort = TRUE) %&gt;%
+     rename(size = n) %&gt;%
+     filter(size &gt;= 17)</code></pre>
+</div>
+<div id="visualize-the-word-pairs" class="section level2">
+<h2>Visualize the Word Pairs</h2>
+<p>Let’s use our single_tokens and body_bigrams2 data to make an interactive network graph of the most common word pairs in the history of Australian election speeches.</p>
+<p>Load ggraph, igraph and DT.</p>
+<pre class="r"><code>library(ggraph)</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggplot2&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:NLP&#39;:
+## 
+##     annotate</code></pre>
+<pre class="r"><code>library(igraph)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     crossing</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     as_data_frame, groups, union</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code>library(DT)</code></pre>
+<p>Create the nodes of the network.</p>
+<pre class="r"><code>body_nodes &lt;- tibble(id = unique(c(body_bigrams2$from, body_bigrams2$to)),
+                        label = unique(c(body_bigrams2$from, body_bigrams2$to))) %&gt;%
+                left_join(single_tokens, by = c(id = &quot;word&quot;))</code></pre>
+<p>Last step! Let’s visualize the network…</p>
+<pre class="r"><code>library(visNetwork)
+
+visNetwork(body_nodes, body_bigrams2)</code></pre>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"nodes":{"id":["li","labor","australia","government","prime","cheers","ul","australian","em","commonwealth","act","labour","menzies","hear","south","applause","local","western","national","social","united","country","means","policy","unreadable","northern","income","laughter","foreign","secondary","ol","liberal","nation","post","primary","industrial","fellow","public","coalition","living","war","child","world","private","royal","basic","health","service","fadden","don","federal","purchasing","air","british","election","people","economic","land","39","john","loud","mother","white","td","age","h2","sales","hire","tax","trade","fraser","sugar","trading","arbitration","defence","dr","curtin","tariff","months","financial","schools","anti","rural","savings","10","armed","chifley","development","medical","natural","party","won","100","personal","raw","time","pre","union","21st","assets","central","civil","education","home","standard","treasury","women","12","estimated","housing","interstate","july","million","preferential","statute","strong","twelve","workers","1978","bruce","peace","returned","shipping","snowy","water","aged","building","greatly","human","increased","taxation","vital","australia’s","east","gains","industry","nuclear","peter","technical","tertiary","wage","capital","fiscal","independent","maternity","overseas","company","constitutional","export","howard","invalid","low","north","overwhelming","safety","short","climate","closer","communist","double","handicapped","married","page","parliamentary","political","price","secret","tr","minister","bank","wales","services","nations","test","speech","territory","industries","producers","relations","australians","kingdom","standards","care","enterprise","parliament","commission","insurance","office","homes","economy","endowment","power","effort","force","empire","families","campaign","proposes","security","welfare","growth","settlement","ll","disputes","products","pensions","community","purchase","reform","movement","banks","court","evatt","management","believes","unrest","hospitals","board","ago","sector","ve","assistance","earners","system","producer","forces","benefits","resources","cuts","position","governments","servants","materials","africa","relief","spending","scheme","century","aviation","ownership","school","gauge","bills","cost","1980","pounds","production","book","ii","79","opinion","soldiers","line","mountains","avoidance","cut","unions","supply","persons","societies","citizens","agreement","rights","h3","importance","pension","future","family","asia","affairs","countries","dollars","weapons","stands","costello","parties","allowance","markets","life","children","powers","intends","authorities","west","majority","net","term","society","change","grants","dissolution","couple","democracy","control","ballot","rebate"],"label":["li","labor","australia","government","prime","cheers","ul","australian","em","commonwealth","act","labour","menzies","hear","south","applause","local","western","national","social","united","country","means","policy","unreadable","northern","income","laughter","foreign","secondary","ol","liberal","nation","post","primary","industrial","fellow","public","coalition","living","war","child","world","private","royal","basic","health","service","fadden","don","federal","purchasing","air","british","election","people","economic","land","39","john","loud","mother","white","td","age","h2","sales","hire","tax","trade","fraser","sugar","trading","arbitration","defence","dr","curtin","tariff","months","financial","schools","anti","rural","savings","10","armed","chifley","development","medical","natural","party","won","100","personal","raw","time","pre","union","21st","assets","central","civil","education","home","standard","treasury","women","12","estimated","housing","interstate","july","million","preferential","statute","strong","twelve","workers","1978","bruce","peace","returned","shipping","snowy","water","aged","building","greatly","human","increased","taxation","vital","australia’s","east","gains","industry","nuclear","peter","technical","tertiary","wage","capital","fiscal","independent","maternity","overseas","company","constitutional","export","howard","invalid","low","north","overwhelming","safety","short","climate","closer","communist","double","handicapped","married","page","parliamentary","political","price","secret","tr","minister","bank","wales","services","nations","test","speech","territory","industries","producers","relations","australians","kingdom","standards","care","enterprise","parliament","commission","insurance","office","homes","economy","endowment","power","effort","force","empire","families","campaign","proposes","security","welfare","growth","settlement","ll","disputes","products","pensions","community","purchase","reform","movement","banks","court","evatt","management","believes","unrest","hospitals","board","ago","sector","ve","assistance","earners","system","producer","forces","benefits","resources","cuts","position","governments","servants","materials","africa","relief","spending","scheme","century","aviation","ownership","school","gauge","bills","cost","1980","pounds","production","book","ii","79","opinion","soldiers","line","mountains","avoidance","cut","unions","supply","persons","societies","citizens","agreement","rights","h3","importance","pension","future","family","asia","affairs","countries","dollars","weapons","stands","costello","parties","allowance","markets","life","children","powers","intends","authorities","west","majority","net","term","society","change","grants","dissolution","couple","democracy","control","ballot","rebate"],"value":[3004,2417,3518,5025,270,256,462,1990,2031,1822,451,533,309,319,325,129,304,161,1380,461,432,1050,486,1470,88,146,415,93,296,214,162,297,634,165,403,635,104,698,208,361,1218,277,832,381,100,231,490,520,99,53,455,67,159,313,457,1808,674,442,3071,87,82,59,116,114,242,3020,57,43,870,536,67,121,104,200,725,56,85,265,275,539,343,89,204,157,182,49,85,774,187,89,1250,80,89,125,43,1031,74,163,30,62,82,104,576,438,168,65,261,88,106,290,56,77,688,48,36,971,32,263,37,65,343,140,155,33,149,123,290,101,142,519,348,217,81,67,35,961,89,32,104,35,257,284,68,109,36,307,82,130,233,117,74,117,123,34,104,112,35,51,110,81,48,53,48,83,327,322,60,36,367,426,129,518,250,176,168,190,625,180,215,711,68,199,274,176,635,421,246,382,246,402,76,625,234,200,282,351,199,98,357,224,290,168,41,82,186,211,497,101,171,112,140,178,46,104,121,41,116,176,238,77,30,308,62,637,69,253,353,422,69,305,421,49,89,31,105,158,485,85,38,64,241,56,86,589,50,51,506,28,25,24,99,83,167,24,32,153,114,154,133,49,151,279,151,348,176,139,683,313,78,157,310,76,48,107,26,196,131,157,428,474,258,30,102,75,189,54,225,162,199,153,31,32,98,431,35,67]},"edges":{"from":["li","labor","australia","labor","government","labor","prime","cheers","li","ul","australian","em","commonwealth","act","labour","menzies","hear","em","hear","south","applause","local","western","commonwealth","national","australian","social","united","em","country","means","em","policy","unreadable","northern","income","laughter","foreign","secondary","li","ol","em","liberal","nation","em","post","primary","primary","industrial","fellow","public","menzies","coalition","south","united","australian","living","industrial","australian","war","child","world","government","australian","private","commonwealth","royal","basic","policy","health","post","service","australian","fadden","child","don","federal","national","purchasing","war","world","air","british","british","australian","election","government","health","people","social","social","social","economic","federal","land","national","39","industrial","john","loud","mother","primary","white","td","age","h2","australia","australian","sales","hire","national","tax","trade","united","australia","british","economic","federal","fraser","h2","labor","sugar","trading","arbitration","defence","dr","labour","ul","curtin","economic","government","industrial","public","tariff","months","private","39","financial","h2","income","national","primary","schools","tax","defence","primary","anti","private","rural","savings","10","arbitration","armed","chifley","defence","development","health","medical","national","national","natural","party","secondary","tax","won","100","commonwealth","financial","income","labor","national","personal","public","raw","south","tax","time","government","h2","health","party","pre","south","union","war","21st","assets","central","civil","education","h2","h2","home","labor","pre","standard","treasury","women","12","australian","estimated","housing","interstate","july","land","million","million","national","preferential","primary","statute","strong","twelve","war","workers","world","1978","39","bruce","education","h2","h2","peace","public","returned","shipping","snowy","tax","tax","trade","trading","water","aged","building","commonwealth","country","fellow","financial","greatly","h2","housing","human","increased","taxation","ul","vital","age","australia’s","australian","east","foreign","foreign","gains","government","h2","health","industry","liberal","million","national","nuclear","party","peter","technical","tertiary","wage","capital","country","fiscal","health","independent","maternity","northern","overseas","public","secondary","aged","australian","chifley","company","constitutional","export","federal","financial","government","h2","home","howard","invalid","local","loud","low","national","north","overwhelming","private","safety","short","taxation","water","australian","climate","closer","commonwealth","communist","double","government","h2","handicapped","married","ol","page","parliamentary","political","price","public","royal","secret","tax","td","tr"],"to":["li","government","39","party","39","39","minister","em","ul","li","people","cheers","bank","em","party","government","hear","hear","em","wales","em","government","australia","government","government","labor","services","nations","applause","party","test","unreadable","speech","em","territory","tax","em","policy","industries","ol","li","loud","party","39","laughter","war","industries","producers","relations","australians","service","fadden","government","australia","kingdom","government","standards","peace","industries","service","care","39","schools","industry","enterprise","parliament","commission","wage","h2","insurance","office","homes","economy","government","endowment","39","government","development","power","effort","war","force","commonwealth","empire","families","campaign","proposes","care","39","security","welfare","service","growth","parliament","settlement","insurance","ll","disputes","howard","cheers","country","products","australia","td","pensions","labor","em","community","tax","purchase","health","reform","union","australia","party","government","policy","labor","government","defence","movement","industry","banks","court","policy","evatt","government","h2","government","management","believes","unrest","hospitals","board","ago","sector","ve","assistance","national","earners","service","industry","commission","system","h2","producer","labor","banks","industries","bank","million","act","forces","government","forces","h2","h2","benefits","party","security","resources","39","industry","cuts","39","million","39","position","families","governments","policy","income","servants","materials","africa","relief","australia","spending","housing","scheme","government","war","east","movement","time","century","test","bank","aviation","system","health","social","ownership","believes","school","gauge","bills","39","months","national","cost","h2","commission","1980","tax","li","pounds","defence","trade","production","book","economy","months","ii","39","peace","79","em","page","h2","education","taxation","time","opinion","soldiers","line","mountains","avoidance","cut","unions","bank","supply","persons","societies","public","39","citizens","resources","increased","industrial","agreement","rights","production","h2","h3","importance","pension","future","family","asia","affairs","countries","tax","h2","foreign","services","h2","government","dollars","economic","weapons","stands","costello","education","education","earners","gains","parties","peace","system","schools","allowance","development","markets","life","schools","care","children","labor","tax","powers","trade","system","agreement","intends","primary","savings","government","pensions","authorities","applause","income","income","west","majority","health","net","term","system","resources","society","change","settlement","grants","party","dissolution","stands","commonwealth","children","couple","h2","government","democracy","party","control","health","australian","ballot","rebate","tr","td"],"size":[1190,640,457,432,282,250,242,239,231,231,206,197,164,157,147,146,142,140,139,127,124,109,105,103,100,97,97,96,93,91,89,88,88,88,86,85,83,82,82,81,81,79,79,79,78,74,74,73,72,70,70,69,67,67,67,66,66,64,63,63,62,62,61,60,60,59,59,58,57,56,55,55,54,54,52,50,50,50,50,50,50,49,47,47,46,46,46,46,45,45,45,43,42,42,42,42,41,41,41,41,41,41,41,40,38,38,37,37,37,36,36,35,35,35,34,34,34,34,34,34,34,34,34,33,33,33,33,33,32,32,32,32,32,32,31,31,30,30,30,30,30,30,30,30,29,29,28,28,28,28,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,26,26,26,26,26,26,26,26,26,26,26,26,25,25,25,25,25,25,25,25,24,24,24,24,24,24,24,24,24,24,24,24,24,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,21,21,21,21,21,21,21,21,21,21,21,21,21,21,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,19,19,19,19,19,19,19,19,19,19,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)"},"evals":[],"jsHooks":[]}</script>
+<p>At first the map appears a little zoomed out. Zoom in with your mouse or trackpad scroll feature and explore the network, click anywhere to drag the map around and click on nodes to highlight their connections.</p>
+<p>`————————————————</p>
+</div>
+
+
+  
+  
+
+
+</div>
+<div class="footer gradient-2">
+  <div class="container footer-container ">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        <div class="footer-title">Sitemap</div>
+        <ul class="list-unstyled">
+            
+              
+                <li><a href="/tags/">Tags</a></li>
+              
+              
+                <li><a href="/categories/">Categories</a></li>
+              
+            
+            
+            
+            <li><a rel="alternate" type="application/rss&#43;xml" href="/index.xml"><i class="fas fa-rss-square"></i> RSS Feed</a></li>
+            
+            
+        </ul>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+        <div class="footer-title">Social</div>
+        <ul class="list-unstyled">
+          
+          <li><a href="https://stats.stackexchange.com/users/207885/davide-lorino" rel="noopener" target="_blank">Cross Validated</a></li>
+          
+          <li><a href="https://github.com/davelorino" rel="noopener" target="_blank">GitHub</a></li>
+          
+          <li><a href="https://stackoverflow.com/users/6317688/davide-lorino" rel="noopener" target="_blank">Stack Overflow</a></li>
+          
+        </ul>
+        
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+      </div> 
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <p class="pull-right text-right">
+          <small><em>Proudly powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a></em></small><br/>
+          <small><em>Theme - <a href="https://github.com/shaform/hugo-theme-den" rel="noopener" target="_blank">Den</a></em></small><br/>
+          <small>
+            &copy; 
+            Davide Lorino
+            2018
+          </small>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

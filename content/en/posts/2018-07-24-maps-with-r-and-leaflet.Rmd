@@ -1,0 +1,120 @@
+---
+title: "Maps with R and Leaflet"
+author: "Davide Lorino"
+date: '2018-07-24'
+output:
+  html_document:
+    df_print: paged
+slug: maps-with-r-and-leaflet
+tags: []
+categories: []
+---
+Interactive Maps in R with leaflet
+2018-07-24
+
+```{r setup, include=FALSE} 
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Plotting interactive maps is easy with the leaflet package in R. In this short guide we’ll use the Launceston Public Seating dataset to plot markers, add pop-ups and freeze the map on an area of interest. Let’s get started.
+
+Load the leaflet and dplyr libraries:
+
+```{r}
+library(leaflet)
+library(dplyr)
+```
+
+Now lets look at our dataset.
+
+## Launceston Seats
+
+On the 20th of July, 2018, the City of Launceston, Tasmania released the ‘Public Seating’ dataset containing 1011 public seats complete with geo-coordinates, materials (aluminium, timber, etc.) and type (seat with back, seat without back, bench, etc.)
+
+The dataset can be found here https://data.gov.au/dataset/public-seating-1c0ab
+
+Import the data into your R environment:
+
+```{r}
+seats_data <- read.csv("Public_Seating.csv")
+```
+
+Call str() on the dataset and take a look and what we’ve got (i'm ommitting the 13th variable in the dataset because it's an obscurely layered list of metadata - it won't be useful for our purposes):
+
+```{r seats_data}
+str(seats_data[,1:12])
+```
+
+Just as an aside, you could also do it this way...
+
+```{r}
+str(seats_data[,-13])
+```
+
+Notice variables X and Y contain the longitude and latitude coordinates of the seats.
+
+Before we plot the seats onto a map, lets look at a basic leaflet.
+
+## Plotting a Leaflet Map
+
+Zoom in and explore the map - can you find your house?
+
+```{r library(leaflet)}
+leaflet() %>%
+  addTiles
+```
+
+Looks good, but it’s not really focused on Tasmania - when we plot our seats we’ll have to navigate manually in the map in order to find them - not ideal. 
+
+Let’s make it so the map looks directly at Launceston, Tasmania from the get-go.
+
+```{r}
+leaflet() %>%
+  addTiles() %>%
+  setView(lng = 147.1376, lat = -41.43584, zoom = 12)
+```
+
+Cool, now we can restrict the movement of the map so that it doesn’t let you stray too far by accident.
+
+```{r}
+leaflet(options = leafletOptions(
+  minZoom = 5, dragging = TRUE)) %>%
+  addTiles() %>%
+  setView(lng = median(seats_data$X), lat = median(seats_data$Y),
+            zoom = 13) %>%
+  setMaxBounds(lng = min(seats_data$X) - .05, lat = min(seats_data$Y) - 0.5,
+               lng2 = max(seats_data$X) + .05, lat2 = max(seats_data$Y) + .05)
+```
+
+In the map above, try to zoom out and move away from Tasmania - the map pulls back.
+
+Now let’s add markers for each seat in the dataset, pay close attention to the line that starts with ‘addMarkers’:
+
+```{r}
+leaflet(options = leafletOptions(
+  minZoom = 5, dragging = TRUE)) %>%
+  addTiles() %>%
+  addMarkers(lng = unique(seats_data$X), lat = unique(seats_data$Y)) %>%
+  setView(lng = median(seats_data$X), lat = median(seats_data$Y),
+          zoom = 13) %>%
+  setMaxBounds(lng = min(seats_data$X) - .05, lat = min(seats_data$Y) - 0.5,
+               lng2 = max(seats_data$X) + .05, lat2 = max(seats_data$Y) + .05)
+```
+
+Ok great, now lets add popups so that the type of seat shows up when we click a marker:
+
+```{r}
+leaflet(options = leafletOptions(
+  minZoom = 5, dragging = TRUE)) %>%
+  addTiles() %>%
+  addMarkers(lng = unique(seats_data$X), lat = unique(seats_data$Y), popup = seats_data$class) %>%
+  setView(lng = median(seats_data$X), lat = median(seats_data$Y),
+          zoom = 13) %>%
+  setMaxBounds(lng = min(seats_data$X) - .05, lat = min(seats_data$Y) - 0.5,
+               lng2 = max(seats_data$X) + .05, lat2 = max(seats_data$Y) + .05)
+```
+
+
+And there we go! Maps are easy with R and leaflet.
+
+` ——————————————————

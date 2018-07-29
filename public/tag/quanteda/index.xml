@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quanteda on  </title>
+    <link>/tag/quanteda/</link>
+    <description>Recent content in Quanteda on  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tag/quanteda/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Text Analysis with tidytext, ggplot2 and Quanteda </title>
+      <link>/2018/07/28/text-analysis-with-tidytext-ggplot2-and-quanteda/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/28/text-analysis-with-tidytext-ggplot2-and-quanteda/</guid>
+      <description>In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
+Libraries There are a fair few libraries to load for text analysis;
+library(stringr) library(tidyverse) ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1.</description>
+    </item>
+    
+  </channel>
+</rss>

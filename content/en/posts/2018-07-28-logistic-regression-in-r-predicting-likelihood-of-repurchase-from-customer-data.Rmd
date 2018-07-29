@@ -1,0 +1,75 @@
+---
+title: Modelling Time Until Reorder Using Customer Transaction Data
+author: Davide Lorino
+date: '2018-07-28'
+slug: survival-analysis-in-r
+categories:
+  - machine learning
+  - predictive modelling
+tags:
+  - machine learning
+  - predictive modelling
+---
+
+In this post we will use Survival Analysis to predict the amount of time until a customer will repurchase. We will use the publicly available Telco customer dataset available on my github under the repo for this post. 
+
+```{r}
+survival_data <- read.csv("customer_transaction_data.csv")
+str(survival_data)
+```
+
+Our variables include "days since first purchase", "gender", "shopping cart value" (how much they spent on their first order), "voucher" (whether or not they used one), "returned" (whether or not they returned anything from their first order) and "bought again".
+
+A quick example here shows the difference between days since first purchase for customers who have yet to repurchase since their first order on the left and customers who have repurcahsed since their first order on the right.
+
+```{r}
+library(ggplot2)
+
+ggplot(survival_data) +
+  geom_histogram(aes(x = daysSinceFirstPurch, fill = factor(boughtAgain))) +
+  facet_grid( ~ boughtAgain) +
+  theme(legend.position = "none")
+```
+
+## Survival Curve Analysis by Kaplan-Meier
+
+Create a new column that holds a 'Survival' object. This will be the variable that we are predicting - the time until repurchase, measured in days.
+
+```{r}
+library(survival)
+
+# Create survival object
+survObj <- Surv(survival_data$daysSinceFirstPurch, survival_data$boughtAgain)
+
+str(survObj)
+```
+
+Compute a Kaplan Meier regression with no covariate analysis (indicated by the 1 to the right of the tilde)
+
+```{r}
+fitKMSimple <- survfit(survObj ~ 1)
+print(fitKMSimple)
+```
+
+Plot the Kaplan Meier fit
+
+```{r}
+plot(fitKMSimple, conf.init = FALSE,
+     xlab = "Time since first purchase", ylab = "Survival function", main = "Survival Function")
+```
+
+The survival function plot shows likelihood of repurchase for first-time buyers over a period of time since their first purchase. There is a clear downward trend.
+
+Here we have not computed our Kaplan Meier fit to account for covariate linearity. For instance, when measuring the height of two plants over a two-year period, the coefficients of variables such as "sunlight" measured in minutes per day, and "soil_richness" measured in bacteria per mg would account for a certain percentage of the outcome variable, height_of_plant. 
+
+Covariate linearity defines the effect that one or more variables can have on each oter predictor variable in the dataset. If we introduce a third variable to the "height_of_plant" example from before, "daily_rainfall", and found that both plants had received completely different amounts of rain, then the percentage of the outcome variable (height_of_plant) as explained by the predictor variables ("sunlight" and "soil_richness") would adjust accordingly because now there is a percentage of the outcome variable being explained by "rainfall", and it may also be having an influence on the impact of the "soil_richness" and "sunlight" variables.
+
+Now we can compute our Kaplan Meier fit to account for covariate linearity.
+
+```{r}
+fitKMCov <- survfit(survObj ~ voucher, data = survival_data)
+
+plot(fitKMCov, lty = 2:3,
+xlab = "Time since first purchase", ylab = "Survival function", main = "Survival function")
+legend(90, .9, c("No", "Yes"), lty = 2:3)
+```

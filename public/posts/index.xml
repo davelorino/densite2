@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on  </title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Modelling Time Until Reorder Using Customer Transaction Data</title>
+      <link>/2018/07/28/survival-analysis-in-r/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/28/survival-analysis-in-r/</guid>
+      <description>In this post we will use Survival Analysis to predict the amount of time until a customer will repurchase. We will use the publicly available Telco customer dataset available on my github under the repo for this post.
+survival_data &amp;lt;- read.csv(&amp;quot;customer_transaction_data.csv&amp;quot;) str(survival_data) ## &amp;#39;data.frame&amp;#39;: 5122 obs. of 6 variables: ## $ daysSinceFirstPurch: int 37 63 48 17 53 11 22 16 74 44 ... ## $ shoppingCartValue : num 33.4 31.</description>
+    </item>
+    
+    <item>
+      <title>Text Analysis with tidytext, ggplot2 and Quanteda </title>
+      <link>/2018/07/28/text-analysis-with-tidytext-ggplot2-and-quanteda/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/28/text-analysis-with-tidytext-ggplot2-and-quanteda/</guid>
+      <description>In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
+Libraries There are a fair few libraries to load for text analysis;
+library(stringr) library(tidyverse) ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1.</description>
+    </item>
+    
+    <item>
+      <title>Text Analysis with visNetwork</title>
+      <link>/2018/07/28/text-analysis-with-visnetwork/</link>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/28/text-analysis-with-visnetwork/</guid>
+      <description>Text Analysis is growing in popularity just about everywhere - it’s an abundant source of data that until recently most analysts have ignored because of it’s unwieldy structure. Recent developments and packages in the R programming language have made it easy to derive significant meaning from a text corpus.
+Practical Applications of Text Analysis  Analysing email data (e.g. from a customer service inbox to analyze queries and feedback), Web scraping (e.</description>
+    </item>
+    
+    <item>
+      <title>Maps with R and Leaflet</title>
+      <link>/2018/07/24/maps-with-r-and-leaflet/</link>
+      <pubDate>Tue, 24 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/24/maps-with-r-and-leaflet/</guid>
+      <description>Interactive Maps in R with leaflet 2018-07-24
+Plotting interactive maps is easy with the leaflet package in R. In this short guide we’ll use the Launceston Public Seating dataset to plot markers, add pop-ups and freeze the map on an area of interest. Let’s get started.
+Load the leaflet and dplyr libraries:
+library(leaflet) library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union Now lets look at our dataset.</description>
+    </item>
+    
+  </channel>
+</rss>
