@@ -57,7 +57,7 @@ defaultContentLanguageInSubdir = true
 
   # site info (optional)
   keywords = ["research", "r","data science"]
-  description = "Statistical analysis using R"
+  description = "Data Science by Davide Lorino"
   logoTitle = "DL" # shown on top-left, default: title
   siteLogoImage = "images/globe.svg"     # shown besides logoTitle
   headerTitle = " "                   # default: title
