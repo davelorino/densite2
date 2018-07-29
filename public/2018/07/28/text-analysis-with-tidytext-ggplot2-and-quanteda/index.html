@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
 Libraries There are a fair few libraries to load for text analysis;
-library(stringr) library(tidyverse) ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1." />
+library(stringr) library(tidyverse) ## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1." />
 
   <meta name="keywords" content="research, r, data science" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -20,7 +20,7 @@ library(stringr) library(tidyverse) ## ── Attaching packages ─────
 <meta property="og:title" content="Text Analysis with tidytext, ggplot2 and Quanteda " />
 <meta property="og:description" content="In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
 Libraries There are a fair few libraries to load for text analysis;
-library(stringr) library(tidyverse) ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1." />
+library(stringr) library(tidyverse) ## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/2018/07/28/text-analysis-with-tidytext-ggplot2-and-quanteda/" />
 
@@ -43,7 +43,7 @@ library(stringr) library(tidyverse) ## ── Attaching packages ─────
 <meta itemprop="name" content="Text Analysis with tidytext, ggplot2 and Quanteda ">
 <meta itemprop="description" content="In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
 Libraries There are a fair few libraries to load for text analysis;
-library(stringr) library(tidyverse) ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1.">
+library(stringr) library(tidyverse) ## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1.">
 
 
 <meta itemprop="datePublished" content="2018-07-28T00:00:00&#43;00:00" />
@@ -57,7 +57,7 @@ library(stringr) library(tidyverse) ## ── Attaching packages ─────
 <meta name="twitter:title" content="Text Analysis with tidytext, ggplot2 and Quanteda "/>
 <meta name="twitter:description" content="In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
 Libraries There are a fair few libraries to load for text analysis;
-library(stringr) library(tidyverse) ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1."/>
+library(stringr) library(tidyverse) ## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1."/>
 </head>
 <body>
   
@@ -134,12 +134,12 @@ library(stringr) library(tidyverse) ## ── Attaching packages ─────
 <p>There are a fair few libraries to load for text analysis;</p>
 <pre class="r"><code>library(stringr)
 library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 2.2.1     ✔ readr   1.1.1
 ## ✔ tibble  1.4.2     ✔ purrr   0.2.5
 ## ✔ tidyr   0.8.1     ✔ dplyr   0.7.5
 ## ✔ ggplot2 2.2.1     ✔ forcats 0.3.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(tidytext)
