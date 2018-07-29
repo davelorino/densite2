@@ -19,7 +19,7 @@
       <guid>/2018/07/28/text-analysis-with-tidytext-ggplot2-and-quanteda/</guid>
       <description>In this short guide we’ll perform text analysis on a corpus of 34 blog posts from one blog and try to determine what the blog is about, let’s see how much we can find out without going through and reading all 34 blog posts.
 Libraries There are a fair few libraries to load for text analysis;
-library(stringr) library(tidyverse) ## ── Attaching packages ─────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1.</description>
+library(stringr) library(tidyverse) ## ── Attaching packages ───────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ readr 1.</description>
     </item>
     
   </channel>
