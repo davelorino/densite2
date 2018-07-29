@@ -26,7 +26,7 @@ PygmentsUseClasses = true    # required for shhighlight shortcode
 
 # service plugins
 disqusShortname = ""         # disqus_shortname
-googleAnalytics = ""         # UA-XXXXXXXX-X
+googleAnalytics = "UA-123002746-1"         # UA-XXXXXXXX-X
 
 # language support # en / zh-tw / other... translations present in i18n/
 defaultContentLanguage = "en"           # Default language to use
