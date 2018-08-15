@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on  </title>
+    <link>/category/python/</link>
+    <description>Recent content in Python on  </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/category/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Automating the Browser with Python and Selenium</title>
+      <link>/2018/08/15/automating-the-browser-with-python-and-selenium/</link>
+      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/08/15/automating-the-browser-with-python-and-selenium/</guid>
+      <description>This is a Python Markdown test.
+from Selenium import webdriver</description>
+    </item>
+    
+  </channel>
+</rss>
