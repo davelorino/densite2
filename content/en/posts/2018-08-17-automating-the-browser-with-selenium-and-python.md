@@ -7,9 +7,7 @@ categories: []
 tags: []
 ---
 
-<p align="center">
-<img src="Scrape.jpeg" width=380 height=600 class="center">
-</p>
+![](Scrape.jpeg)
 
 Q: How do you scrape data off a website that's rendered in Javascript? 
 
