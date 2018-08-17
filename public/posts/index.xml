@@ -6,19 +6,21 @@
     <description>Recent content in Posts on  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Automating the Browser with Python and Selenium</title>
-      <link>/2018/08/15/automating-the-browser-with-python-and-selenium/</link>
-      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
+      <title>Automating the Browser with Selenium and Python</title>
+      <link>/2018/08/17/automating-the-browser-with-selenium-and-python/</link>
+      <pubDate>Fri, 17 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/08/15/automating-the-browser-with-python-and-selenium/</guid>
-      <description>This is a Python Markdown test.
-from Selenium import webdriver</description>
+      <guid>/2018/08/17/automating-the-browser-with-selenium-and-python/</guid>
+      <description>Q: How do you scrape data off a website that&amp;rsquo;s rendered in Javascript?
+A: The Selenium module in Python.
+In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:
+ Hover-over dropdown menus Select sub-menus Fill in text entry fields such as username and password to perform login operations Basically use the .</description>
     </item>
     
     <item>
@@ -70,7 +72,7 @@ library(leaflet) library(dplyr) ## ## Attaching package: &amp;#39;dplyr&amp;#39;
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/1/01/01/</guid>
-      <description>Automating the Browser with Python and Selenium       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
+      <description>Automating the Browser with Selenium and Python       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
     </item>
     
   </channel>

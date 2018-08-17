@@ -6,7 +6,7 @@
     <description>Recent content in Tags on  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Data Science</title>
       <link>/tag/data-science/</link>
-      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tag/data-science/</guid>
       <description></description>
@@ -44,15 +44,6 @@
       <pubDate>Sat, 28 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tag/predictive-modelling/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/tag/python/</link>
-      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tag/python/</guid>
       <description></description>
     </item>
     

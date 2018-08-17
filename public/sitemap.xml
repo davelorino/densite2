@@ -10,8 +10,8 @@
   </url>
   
   <url>
-    <loc>/2018/08/15/automating-the-browser-with-python-and-selenium/</loc>
-    <lastmod>2018-08-15T00:00:00+00:00</lastmod>
+    <loc>/2018/08/17/automating-the-browser-with-selenium-and-python/</loc>
+    <lastmod>2018-08-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -64,28 +64,21 @@
   </url>
   
   <url>
-    <loc>/tag/data-science/</loc>
-    <lastmod>2018-08-15T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/category/data-science/</loc>
-    <lastmod>2018-08-15T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tag/ggplot2/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tag/machine-learning/</loc>
+    <loc>/tag/data-science/</loc>
+    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tag/ggplot2/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -99,15 +92,15 @@
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2018-08-15T00:00:00+00:00</lastmod>
+    <loc>/tag/machine-learning/</loc>
+    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tag/predictive-modelling/</loc>
-    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+    <loc>/posts/</loc>
+    <lastmod>2018-08-17T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
@@ -120,28 +113,14 @@
   </url>
   
   <url>
-    <loc>/tag/python/</loc>
-    <lastmod>2018-08-15T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/category/python/</loc>
-    <lastmod>2018-08-15T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tag/quanteda/</loc>
+    <loc>/tag/predictive-modelling/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tag/r/</loc>
+    <loc>/tag/quanteda/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -155,14 +134,14 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2018-08-15T00:00:00+00:00</lastmod>
+    <loc>/tag/r/</loc>
+    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tag/text-analysis/</loc>
+    <loc>/tags/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>
@@ -170,6 +149,13 @@
   
   <url>
     <loc>/category/text-analysis/</loc>
+    <lastmod>2018-07-28T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tag/text-analysis/</loc>
     <lastmod>2018-07-28T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0</priority>

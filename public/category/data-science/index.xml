@@ -6,20 +6,10 @@
     <description>Recent content in Data Science on  </description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 15 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/category/data-science/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Automating the Browser with Python and Selenium</title>
-      <link>/2018/08/15/automating-the-browser-with-python-and-selenium/</link>
-      <pubDate>Wed, 15 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/08/15/automating-the-browser-with-python-and-selenium/</guid>
-      <description>This is a Python Markdown test.
-from Selenium import webdriver</description>
-    </item>
     
     <item>
       <title>Text Analysis with tidytext, ggplot2 and Quanteda </title>
