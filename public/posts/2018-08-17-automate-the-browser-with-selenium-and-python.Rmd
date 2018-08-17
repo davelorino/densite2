@@ -1,6 +1,4 @@
 ---
-output:
-  html_document:
 title: "Automate the Browser with Selenium and Python"
 author: "Davide Lorino"
 date: '2018-08-17'
