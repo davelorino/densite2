@@ -12,6 +12,17 @@
     
     
     <item>
+      <title>Automate the Browser with Selenium and Python</title>
+      <link>/2018/08/17/automate-the-browser-with-selenium-and-python/</link>
+      <pubDate>Fri, 17 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/08/17/automate-the-browser-with-selenium-and-python/</guid>
+      <description>Scrape
+ Q: How do you scrape data off a website that’s rendered in Javascript?  A: The Selenium module in Python. In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:
+ Hover-over dropdown menus Select sub-menus Fill in text entry fields such as username and password to perform login operations Basically use the .</description>
+    </item>
+    
+    <item>
       <title>Automating the Browser with Selenium and Python</title>
       <link>/2018/08/17/automating-the-browser-with-selenium-and-python/</link>
       <pubDate>Fri, 17 Aug 2018 00:00:00 +0000</pubDate>

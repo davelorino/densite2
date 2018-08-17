@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
+<head>
+  <meta name="generator" content="Hugo 0.45" />
+  <meta charset="utf-8">
+  <title>Automate the Browser with Selenium and Python ·  </title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Scrape
+ Q: How do you scrape data off a website that’s rendered in Javascript?  A: The Selenium module in Python. In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:
+ Hover-over dropdown menus Select sub-menus Fill in text entry fields such as username and password to perform login operations Basically use the ." />
+
+  <meta name="keywords" content="research, r, data science" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/den.css">
+
+
+
+
+<meta property="og:title" content="Automate the Browser with Selenium and Python" />
+<meta property="og:description" content="Scrape
+ Q: How do you scrape data off a website that’s rendered in Javascript?  A: The Selenium module in Python. In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:
+ Hover-over dropdown menus Select sub-menus Fill in text entry fields such as username and password to perform login operations Basically use the ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/2018/08/17/automate-the-browser-with-selenium-and-python/" />
+
+
+
+<meta property="article:published_time" content="2018-08-17T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-08-17T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Automate the Browser with Selenium and Python">
+<meta itemprop="description" content="Scrape
+ Q: How do you scrape data off a website that’s rendered in Javascript?  A: The Selenium module in Python. In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:
+ Hover-over dropdown menus Select sub-menus Fill in text entry fields such as username and password to perform login operations Basically use the .">
+
+
+<meta itemprop="datePublished" content="2018-08-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-08-17T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="713">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Automate the Browser with Selenium and Python"/>
+<meta name="twitter:description" content="Scrape
+ Q: How do you scrape data off a website that’s rendered in Javascript?  A: The Selenium module in Python. In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:
+ Hover-over dropdown menus Select sub-menus Fill in text entry fields such as username and password to perform login operations Basically use the ."/>
+
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-123002746-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+</head>
+<body>
+  
+  <div class="header-container" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('/images/background.jpg'); background-position: center; background-size: cover;">
+  <div class="container">
+  <nav class="header-nav navbar navbar-expand-md navbar-dark light-dark">
+    <div class="header-logo navbar-brand">
+      
+        <a class="float-left" href="/">
+      
+        
+        <img class="mr20 header-logo-image" src="/images/globe.svg" alt="logo">
+        
+        
+          DL
+         
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="nav-menu collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            
+              <a class="nav-link" href="/about/">About</a>
+            
+          </li>
+        
+        
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div class="container header-wrapper">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="header-content">
+        <h1 class="header-title">Automate the Browser with Selenium and Python</h1>
+        <p class="header-date">
+        2018-08-17
+        <div class="header-underline"></div>
+        
+        
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+<div class="container content">
+  <div class="figure">
+<img src="Scrape.png" alt="Scrape" />
+<p class="caption">Scrape</p>
+</div>
+<div id="q-how-do-you-scrape-data-off-a-website-thats-rendered-in-javascript" class="section level1">
+<h1>Q: How do you scrape data off a website that’s rendered in Javascript?</h1>
+</div>
+<div id="a-the-selenium-module-in-python." class="section level1">
+<h1>A: The Selenium module in Python.</h1>
+<p>In this post I will go over he can use Selenium in Python to interact with website objects that are rendered in javascript so that we can do things like:</p>
+<ul>
+<li>Hover-over dropdown menus</li>
+<li>Select sub-menus</li>
+<li>Fill in text entry fields such as username and password to perform login operations</li>
+<li>Basically use the .click() and .find_element_by_xpath() functions to do everything</li>
+</ul>
+<p>Building a webscraper/crawler to programmatically pull data from the internet is a really commonly sought after skill. Most businesspeople put together reports that are usually some sort of aggregation on multiple csv files that all need to get pooled together and joined in a summarized form.</p>
+<p>Because of the iterative nature of these reports (daily, weekly, monthly, quarterly) the process of requesting and pooling the data together can be extremely tedious, especially if you have lots of data in different places.</p>
+<p>For this, we need the Selenium module in Python. We can pre-generate a script that will fetch our data each and every time we want to run a report - the only thing that we will change in our script between iterations will be the date variables so that we arent just pulling data for the exact same date or range every time (we will want different data otherwise theres no point doing more than one of the same report).</p>
+<div id="load-the-required-python-modules" class="section level3">
+<h3>Load the Required Python Modules</h3>
+<p>from selenium import webdriver from selenium.webdriver.common.action_chains import ActionChains import time</p>
+<p>Selenium imports a set of functions that allow us to automate browser interactions with javascript rendered websites such as ipScape.</p>
+<p>Time is a module for declaring when to pause the script and for how long in order to allow for certain operations to complete before the script races ahead of where the browser is actually at. The impact of this is that when the script looks for variables on the page they will not have been rendered yet and the script will throw an error and not proceed. For this reason we make use of the function <code>time.sleep(3)</code> where (3) denotes the number of seconds you want to wait.</p>
+<div id="store-username-and-password-in-python-to-pass-to-the-reports-login-page" class="section level4">
+<h4>Store Username and Password in Python to Pass to the Reports Login Page</h4>
+<p>{python} usernameStr = ‘A_Username’ passwordStr = ‘A_Password’</p>
+</div>
+<div id="store-the-date-in-python" class="section level4">
+<h4>Store the Date in Python</h4>
+<p>The dates “From” and “To” will be sent to the ipScape date filters for the report that we run. For this reason, we will change the dates in the below command to suit the date range that we are trying to capture. Here we have declared August 11th to August 16th, so we will download data corresponding to this date range when the script runs.</p>
+<p>This is the only part of the script that we need to interact with - have fun!</p>
+<p>date_From = “11/08/2018 00:00:00” date_To = “16/08/2018 00:00:00”</p>
+</div>
+<div id="load-the-required-webdriver---here-we-use-the-google-chrome-driver" class="section level4">
+<h4>Load the Required Webdriver - Here we use the Google Chrome driver</h4>
+<p>browser = webdriver.Chrome(‘/Users/Davide/Downloads/chromedriver’)</p>
+</div>
+<div id="navigate-to-the-page" class="section level4">
+<h4>Navigate to the Page</h4>
+<p>browser.get(‘<a href="https://winepeoplev5.ipscape.com.au/workspace" class="uri">https://winepeoplev5.ipscape.com.au/workspace</a>’)</p>
+</div>
+<div id="store-an-actions-object-from-the-selenium-module-for-interacting-with-javascript-rendered-page-objects" class="section level4">
+<h4>Store an Actions Object from the Selenium Module for Interacting with Javascript Rendered Page Objects</h4>
+<p>action = ActionChains(browser)</p>
+</div>
+<div id="find-the-username-field-in-the-login-form-and-enter-username" class="section level4">
+<h4>Find the Username Field in the Login Form and Enter Username</h4>
+<p>username = browser.find_element_by_class_name(‘login_text’)</p>
+<p>username.send_keys(usernameStr)</p>
+</div>
+<div id="find-the-password-field-and-enter-password" class="section level4">
+<h4>Find the Password Field and Enter Password</h4>
+<p>password = browser.find_element_by_class_name</p>
+<p>password = browser.find_element_by_name(‘pwd’)</p>
+<p>password.send_keys(passwordStr)</p>
+</div>
+<div id="find-and-click-login" class="section level4">
+<h4>Find and Click Login</h4>
+<p>login = browser.find_element_by_id(‘loginbttn’)</p>
+<p>login.click()</p>
+</div>
+<div id="go-to-the-first-reports-page" class="section level4">
+<h4>Go to the First Reports Page</h4>
+<p>report1 = browser.find_element_by_link_text(‘Live Reports’)</p>
+<p>report1.click()</p>
+</div>
+<div id="hover-over-the-administration-dropdown" class="section level4">
+<h4>Hover Over the Administration Dropdown</h4>
+<p>time.sleep(5)</p>
+<p>historical_reports = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;ui-id-10&quot;]</span>’)</p>
+<p>time.sleep(3)</p>
+<p>historical_reports.click()</p>
+<p>time.sleep(5)</p>
+<p>firstLevelMenu = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;header_container&quot;]</span>/nav/div/ul/li[2]/a’)</p>
+<p>action.move_to_element(firstLevelMenu).perform()</p>
+<p>time.sleep(2)</p>
+</div>
+<div id="find-and-click-the-reports-subheading-of-the-administration-dropdown" class="section level4">
+<h4>Find and Click the Reports Subheading of the Administration Dropdown</h4>
+<p>secondLevelMenu = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-management-dialog-invoke&quot;]</span>’)</p>
+<p>action.move_to_element(secondLevelMenu).perform()</p>
+<p>secondLevelMenu.click()</p>
+<p>time.sleep(4)</p>
+<p>search_reports = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report_search_string&quot;]</span>’)</p>
+<p>search_reports.send_keys(“Historical Inbound Upsell”)</p>
+<p>time.sleep(2)</p>
+<p>search_report_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report_search_button&quot;]</span>’)</p>
+<p>time.sleep(1)</p>
+<p>search_report_again.click()</p>
+<p>time.sleep(6)</p>
+<p>edit_report_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-list-table&quot;]</span>/tbody/tr/td[4]/button[2]/a’)</p>
+<p>time.sleep(2)</p>
+<p>edit_report_again.click()</p>
+<p>time.sleep(2)</p>
+<p>filter_report_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;ui-accordion-report-create-edit-accordion-header-1&quot;]</span>’)</p>
+<p>time.sleep(2)</p>
+<p>filter_report_again.click()</p>
+<p>time.sleep(3)</p>
+<p>campaign_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-filters-table&quot;]</span>/tbody/tr[1]/td[2]/label/select’)</p>
+<p>time.sleep(2)</p>
+<p>campaign_again.click()</p>
+<p>time.sleep(2)</p>
+<p>campaign_is_in_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-filters-table&quot;]</span>/tbody/tr[1]/td[2]/label/select/option[2]’)</p>
+<p>time.sleep(2)</p>
+<p>campaign_is_in_again.click()</p>
+<p>time.sleep(2)</p>
+<p>call_outcome_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-filters-table&quot;]</span>/tbody/tr[2]/td[2]/label/select’)</p>
+<p>time.sleep(2)</p>
+<p>call_outcome_again.click()</p>
+<p>time.sleep(2)</p>
+<p>call_outcome_again_is_in = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-filters-table&quot;]</span>/tbody/tr[2]/td[2]/label/select/option[2]’)</p>
+<p>time.sleep(2)</p>
+<p>date_time_range_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-filters-table&quot;]</span>/tbody/tr[3]/td[2]/label/select’)</p>
+<p>time.sleep(4)</p>
+<p>date_time_range_again.click()</p>
+<p>date_time_range_again.click()</p>
+<p>date_time_range_again.click()</p>
+<p>date_time_range_again.click()</p>
+<p>time.sleep(4)</p>
+<p>date_time_range_again_is_range = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report-filters-table&quot;]</span>/tbody/tr[3]/td[2]/label/select/option[3]’)</p>
+<p>time.sleep(4)</p>
+<p>date_time_range_again_is_range.click()</p>
+<p>date_time_range_again_is_range.click()</p>
+<p>date_time_range_again_is_range.click()</p>
+<p>date_time_range_again_is_range.click()</p>
+<p>time.sleep(2)</p>
+<p>filter_bar = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;ui-accordion-report-create-edit-accordion-header-1&quot;]</span>’)</p>
+<p>time.sleep(4)</p>
+<p>filter_bar.click()</p>
+<p>time.sleep(10)</p>
+<p>date_from_agen = browser.find_element_by_name(“filter_value_from[14010790]”)</p>
+<p>time.sleep(2)</p>
+<p>date_from_agen.clear()</p>
+<p>date_from_agen.send_keys(date_From)</p>
+<p>time.sleep(3)</p>
+<p>date_to_agen = browser.find_element_by_name(“filter_value_to[14010790]”)</p>
+<p>time.sleep(2)</p>
+<p>date_to_agen.clear()</p>
+<p>date_to_agen.send_keys(date_To)</p>
+<p>time.sleep(2)</p>
+<p>save_report_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;save-report-button&quot;]</span>’)</p>
+<p>time.sleep(2)</p>
+<p>save_report_again.click()</p>
+<p>time.sleep(5)</p>
+<p>put_report_on_page_again = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;put-report-button&quot;]</span>’)</p>
+<p>time.sleep(2)</p>
+<p>put_report_on_page_again.click()</p>
+<p>time.sleep(3)</p>
+<p>expand_rows_third_report = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report_5472Pager_center&quot;]</span>/table/tbody/tr/td[8]/select’)</p>
+<p>time.sleep(2)</p>
+<p>expand_rows_third_report.click()</p>
+<p>time.sleep(2)</p>
+<p>all_rows_third_report = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report_5472Pager_center&quot;]</span>/table/tbody/tr/td[8]/select/option[11]’)</p>
+<p>time.sleep(2)</p>
+<p>all_rows_third_report.click()</p>
+<p>time.sleep(3)</p>
+<p>download_third_report = browser.find_element_by_xpath(’//*<span class="citation">[@id=&quot;report_page_container&quot;]</span>/div/table/tbody/tr/td[1]/div/button[8]’)</p>
+<p>time.sleep(2)</p>
+<p>download_third_report.click()</p>
+<p>time.sleep(5)</p>
+</div>
+</div>
+</div>
+
+
+  
+  
+
+
+</div>
+<div class="footer gradient-2">
+  <div class="container footer-container ">
+    <div class="row">
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        <div class="footer-title">Sitemap</div>
+        <ul class="list-unstyled">
+            
+              
+                <li><a href="/tags/">Tags</a></li>
+              
+              
+                <li><a href="/categories/">Categories</a></li>
+              
+            
+            
+            
+            <li><a rel="alternate" type="application/rss&#43;xml" href="/index.xml"><i class="fas fa-rss-square"></i> RSS Feed</a></li>
+            
+            
+        </ul>
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+        <div class="footer-title">Social</div>
+        <ul class="list-unstyled">
+          
+          <li><a href="https://stats.stackexchange.com/users/207885/davide-lorino" rel="noopener" target="_blank">Cross Validated</a></li>
+          
+          <li><a href="https://github.com/davelorino" rel="noopener" target="_blank">GitHub</a></li>
+          
+          <li><a href="https://stackoverflow.com/users/6317688/davide-lorino" rel="noopener" target="_blank">Stack Overflow</a></li>
+          
+        </ul>
+        
+      </div>
+      <div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+        
+      </div> 
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <p class="pull-right text-right">
+          <small><em>Proudly powered by <a href="https://gohugo.io/" rel="noopener" target="_blank">Hugo</a></em></small><br/>
+          <small><em>Theme - <a href="https://github.com/shaform/hugo-theme-den" rel="noopener" target="_blank">Den</a></em></small><br/>
+          <small>
+            &copy; 
+            Davide Lorino
+            2018
+          </small>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

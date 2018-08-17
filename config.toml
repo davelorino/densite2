@@ -64,6 +64,7 @@ defaultContentLanguageInSubdir = true
   headerImage = "images/background.jpg"
 
   showMenuLanguages = true
+  self_contained: no
 
   # paginate style, default use numbered pagination links
   # if true, use original "Previous" and "Next" links.
