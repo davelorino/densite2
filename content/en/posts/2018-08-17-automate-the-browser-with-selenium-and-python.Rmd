@@ -2,6 +2,7 @@
 output:
   html_document:
     df_print: paged
+  pdf_document: default
 self_contained: no
 title: "Automate the Browser with Selenium and Python"
 author: "Davide Lorino"
@@ -10,6 +11,13 @@ slug: automate-the-browser-with-selenium-and-python
 tags: []
 categories: []
 ---
+
+
+```{r}
+img1_path <- "~/Downloads/den/public/images/Scrape.png"
+library(png)
+img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
+```
 
 ![Scrape](Scrape.jpeg)
 
