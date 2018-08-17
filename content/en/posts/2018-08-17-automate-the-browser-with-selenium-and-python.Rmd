@@ -11,7 +11,7 @@ tags: []
 categories: []
 ---
 
-![Scrape](Scrape.jpeg){:height = 20 :width = 40}
+![Scrape](Scrape.jpeg)
 
 
 
