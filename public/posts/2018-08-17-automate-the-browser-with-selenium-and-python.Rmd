@@ -1,14 +1,24 @@
 ---
+output:
+  html_document:
 title: "Automate the Browser with Selenium and Python"
 author: "Davide Lorino"
 date: '2018-08-17'
-self_contained: no
 slug: automate-the-browser-with-selenium-and-python
 tags: []
 categories: []
 ---
 
-![Scrape](~/Downloads/den/content/en/posts/Scrape.png)
+
+```{r}
+img1_path <- "~/Downloads/den/public/images/Scrape.png"
+library(png)
+img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
+```
+
+![Scrape](Scrape.jpeg)
+
+
 
 # Q: How do you scrape data off a website that's rendered in Javascript? 
 
