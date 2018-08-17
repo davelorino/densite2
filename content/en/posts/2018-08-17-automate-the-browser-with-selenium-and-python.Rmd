@@ -1,9 +1,6 @@
 ---
 output:
   html_document:
-    df_print: paged
-  pdf_document: default
-self_contained: no
 title: "Automate the Browser with Selenium and Python"
 author: "Davide Lorino"
 date: '2018-08-17'
