@@ -44,7 +44,7 @@
       
         <description>
 
-&lt;p&gt;&lt;img src=&#34;Scrape.jpeg&#34; alt=&#34;drawing&#34; width=&#34;100px&#34; class=&#34;center&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Scrape.jpeg&#34; alt=&#34;alternativetext&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Q: How do you scrape data off a website that&amp;rsquo;s rendered in Javascript?&lt;/p&gt;
 
